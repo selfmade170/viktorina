@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина по теме "Строение клетки"</title>
+    <style>
+        /* Общие стили и яркие цвета */
+        :root {
+            --color-primary: #FF5733; /* Ярко-оранжевый/красный */
+            --color-secondary: #33FF57; /* Ярко-зеленый */
+            --color-accent: #3357FF; /* Ярко-синий */
+            --color-background: #F0F8FF; /* Светлый фон */
+            --color-text: #34495E;
+            --color-card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px 20px;
+            padding: 30px;
+            background-color: var(--color-card-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        h1 {
+            color: var(--color-accent);
+            text-align: center;
+            border-bottom: 4px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        /* Стиль вопросов (карточки) */
+        .question-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #F8F9FA;
+            border: 1px solid #EAECEE;
+            border-left: 5px solid var(--color-secondary);
+            border-radius: 8px;
+        }
+
+        .question-text {
+            font-weight: bold;
+            color: var(--color-primary);
+            font-size: 1.15em;
+            margin-bottom: 15px;
+        }
+
+        /* Стиль вариантов ответов */
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 8px 0;
+            padding: 12px;
+            background-color: #EBF5FB;
+            border: 1px solid #D6EAF8;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .options li:hover {
+            background-color: #D4E6F1;
+            transform: translateY(-2px);
+        }
+        
+        /* Начальный экран */
+        #start-screen {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        #start-screen h2 {
+            color: var(--color-accent);
+        }
+
+        #name-input {
+            padding: 12px;
+            width: 80%;
+            max-width: 300px;
+            margin: 20px 0;
+            border: 2px solid var(--color-secondary);
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+
+        .start-button {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #E74C3C;
+        }
+        
+        /* Ключ к ответам */
+        .answer-key { 
+            background-color: #E8F8F5; 
+            padding: 20px; 
+            border: 1px solid #1ABC9C; 
+            border-radius: 10px; 
+            margin-top: 40px; 
+        }
+        .answer-key h2 {
+            color: #1ABC9C;
+            border-bottom: 2px solid #1ABC9C;
+            padding-bottom: 5px;
+        }
+        .correct-answer { color: #1ABC9C; font-weight: bold; }
+        .rationale { font-size: 0.9em; color: #34495E; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="start-screen">
+            <h2>Добро пожаловать в викторину по строению клетки!</h2>
+            <p>Чтобы начать, пожалуйста, введите свое имя:</p>
+            <input type="text" id="name-input" placeholder="Ваше имя">
+            <button class="start-button" onclick="startQuiz()">Начать викторину</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none;">
+            <h1 id="quiz-title">Викторина по теме "Строение клетки"</h1>
+            <p>Привет, <span id="student-name" style="font-weight: bold; color: var(--color-primary);"></span>! Приступим к вопросам!</p>
+            
+            <ol class="quiz-questions">
+                
+                <li class="question-item">
+                    <div class="question-text">1. Какие три элемента являются неизменными и общими для каждой живой клетки, независимо от ее происхождения?</div>
+                    <ul class="options">
+                        <li>Клеточная мембрана, цитоплазма, ДНК</li>
+                        <li>Ядро, митохондрии, цитоплазма</li>
+                        <li>Клеточная стенка, рибосомы, ядро</li>
+                        <li>Хлоропласты, цитоплазма, клеточная мембрана</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">2. Главное структурное отличие эукариотических клеток от прокариотических заключается в наличии:</div>
+                    <ul class="options">
+                        <li>Оформленного ядра.</li>
+                        <li>Рибосом.</li>
+                        <li>Цитоплазмы.</li>
+                        <li>Клеточной мембраны.</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">3. Какую ключевую функцию выполняют рибосомы в клетке?</div>
+                    <ul class="options">
+                        <li>Синтез липидов.</li>
+                        <li>Биосинтез белка.</li>
+                        <li>Транспортировка веществ.</li>
+                        <li>Упаковка и модификация белков.</li>
+                    </ul>
+                </li>
+                
+                <li class="question-item">
+                    <div class="question-text">4. Какой органоид называют «энергетической станцией» клетки, синтезирующей молекулы АТФ в процессе клеточного дыхания?</div>
+                    <ul class="options">
+                        <li>Хлоропласты</li>
+                        <li>Митохондрии</li>
+                        <li>Лизосомы</li>
+                        <li>Аппарат Гольджи</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">5. Какую функцию выполняют лизосомы в животной клетке?</div>
+                    <ul class="options">
+                        <li>Контроль над всеми процессами жизнедеятельности.</li>
+                        <li>Ликвидация поврежденных и изношенных клеточных останков.</li>
+                        <li>Синтез белка.</li>
+                        <li>Запасание клеточного сока.</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">6. В чем заключается основная роль Аппарата Гольджи (Комплекса Гольджи)?</div>
+                    <ul class="options">
+                        <li>Поддержание формы клетки.</li>
+                        <li>Модификация, сортировка и упаковка белков и других веществ.</li>
+                        <li>Синтез наследственного материала (ДНК).</li>
+                        <li>Обеспечение передвижения прокариотических организмов.</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">7. Какая разновидность эндоплазматической сети (ЭПС) имеет прикрепленные рибосомы и преимущественно отвечает за синтез и транспорт белка?</div>
+                    <ul class="options">
+                        <li>Транспортная ЭПС</li>
+                        <li>Шероховатая (гранулярная) ЭПС</li>
+                        <li>Гладкая (агранулярная) ЭПС</li>
+                        <li>Мембранная ЭПС</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">8. Специфический органоид, присутствующий только в клетках автотрофов (например, растений), в котором протекает процесс фотосинтеза:</div>
+                    <ul class="options">
+                        <li>Митохондрия</li>
+                        <li>Хлоропласт</li>
+                        <li>Вакуоль</li>
+                        <li>Ядрышко</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">9. Что представляет собой наследственный материал, содержащийся в ядре и предписывающий клетке, что ей нужно делать?</div>
+                    <ul class="options">
+                        <li>АТФ</li>
+                        <li>ДНК</li>
+                        <li>Рибосома</li>
+                        <li>Цитоплазма</li>
+                    </ul>
+                </li>
+
+                <li class="question-item">
+                    <div class="question-text">10. Какой органоид состоит из сплетения белковых нитей и полых микротрубочек, обеспечивая клетке поддержание формы?</div>
+                    <ul class="options">
+                        <li>Клеточная стенка</li>
+                        <li>Цитоскелет</li>
+                        <li>Хроматин</li>
+                        <li>Центральная вакуоль</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="answer-key">
+                <h2>Ключ к ответам (для учителя)</h2>
+                <ol>
+                    <li><span class="correct-answer">Клеточная мембрана, цитоплазма, ДНК.</span><div class="rationale">Обоснование: Общие структурно-функциональные единицы всех живых клеток.</div></li>
+                    <li><span class="correct-answer">Оформленного ядра.</span><div class="rationale">Обоснование: Ключевой признак эукариот.</div></li>
+                    <li><span class="correct-answer">Биосинтез белка.</span><div class="rationale">Обоснование: Рибосомы — фабрики белка.</div></li>
+                    <li><span class="correct-answer">Митохондрии.</span><div class="rationale">Обоснование: Энергетические станции клетки (синтез АТФ).</div></li>
+                    <li><span class="correct-answer">Ликвидация поврежденных и изношенных клеточных останков.</span><div class="rationale">Обоснование: Содержат ферменты для расщепления отходов.</div></li>
+                    <li><span class="correct-answer">Модификация, сортировка и упаковка белков и других веществ.</span><div class="rationale">Обоснование: Комплекс Гольджи дорабатывает и упаковывает вещества.</div></li>
+                    <li><span class="correct-answer">Шероховатая (гранулярная) ЭПС.</span><div class="rationale">Обоснование: Имеет прикрепленные рибосомы.</div></li>
+                    <li><span class="correct-answer">Хлоропласт.</span><div class="rationale">Обоснование: Место протекания фотосинтеза.</div></li>
+                    <li><span class="correct-answer">ДНК.</span><div class="rationale">Обоснование: Наследственный материал, содержащийся в ядре.</div></li>
+                    <li><span class="correct-answer">Цитоскелет.</span><div class="rationale">Обоснование: Внутренний каркас, поддерживающий форму.</div></li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+        function startQuiz() {
+            const nameInput = document.getElementById('name-input');
+            const studentNameSpan = document.getElementById('student-name');
+            const startScreen = document.getElementById('start-screen');
+            const quizScreen = document.getElementById('quiz-screen');
+            
+            const studentName = nameInput.value.trim();
+            
+            if (studentName) {
+                studentNameSpan.textContent = studentName;
+                startScreen.style.display = 'none';
+                quizScreen.style.display = 'block';
+            } else {
+                alert("Пожалуйста, введите имя, чтобы начать!");
+            }
+        }
+    </script>
+
+</body>
+</html>
